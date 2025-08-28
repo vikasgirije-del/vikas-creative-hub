@@ -8,31 +8,31 @@
   :root {
     /* Background System */
     --background: 0 0% 100%;
-    --foreground: 215 28% 17%;
+    --foreground: 0 0% 0%;
     --surface: 0 0% 98%;
     
     /* Card System */
     --card: 0 0% 100%;
-    --card-foreground: 215 28% 17%;
-    --card-hover: 220 14% 96%;
+    --card-foreground: 0 0% 0%;
+    --card-hover: 0 0% 96%;
     
     /* Popover System */
     --popover: 0 0% 100%;
-    --popover-foreground: 215 28% 17%;
+    --popover-foreground: 0 0% 0%;
     
-    /* Brand Colors - Professional Blue with Creative Accent */
-    --primary: 225 73% 57%;        /* Sophisticated Blue */
+    /* Brand Colors - Black, White, Red Palette */
+    --primary: 354 70% 54%;        /* Red accent #E63946 */
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 225 73% 67%;   /* Lighter for gradients */
+    --primary-glow: 354 70% 64%;   /* Lighter red for gradients */
     
-    --secondary: 15 86% 62%;       /* Warm Orange Accent */
+    --secondary: 0 0% 0%;          /* Black */
     --secondary-foreground: 0 0% 100%;
-    --secondary-glow: 15 86% 72%;
+    --secondary-glow: 0 0% 20%;
     
     /* Neutral System */
-    --muted: 220 14% 96%;
-    --muted-foreground: 215 16% 47%;
-    --accent: 225 73% 57%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 47%;
+    --accent: 354 70% 54%;
     --accent-foreground: 0 0% 100%;
     
     /* Status Colors */
@@ -42,19 +42,19 @@
     --success-foreground: 0 0% 100%;
     
     /* Interface */
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 225 73% 57%;
+    --border: 0 0% 91%;
+    --input: 0 0% 91%;
+    --ring: 354 70% 54%;
     
     /* Design System Extensions */
     --radius: 12px;
-    --shadow-soft: 0 4px 24px hsla(225, 73%, 57%, 0.08);
-    --shadow-medium: 0 8px 32px hsla(225, 73%, 57%, 0.12);
-    --shadow-strong: 0 16px 64px hsla(225, 73%, 57%, 0.16);
+    --shadow-soft: 0 4px 24px hsla(0, 0%, 0%, 0.08);
+    --shadow-medium: 0 8px 32px hsla(0, 0%, 0%, 0.12);
+    --shadow-strong: 0 16px 64px hsla(0, 0%, 0%, 0.16);
     
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
-    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--surface)) 100%);
     --gradient-card: linear-gradient(145deg, hsl(var(--card)) 0%, hsl(var(--surface)) 100%);
     
     /* Typography Scale */
@@ -141,6 +141,29 @@
 }
 
 @layer components {
+  /* Grain Texture Overlay */
+  .grain-texture {
+    position: relative;
+  }
+  
+  .grain-texture::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.1;
+    background-image: 
+      radial-gradient(circle at 25% 25%, transparent 2px, rgba(0, 0, 0, 0.05) 2px),
+      radial-gradient(circle at 75% 75%, transparent 2px, rgba(255, 255, 255, 0.05) 2px),
+      radial-gradient(circle at 50% 50%, transparent 1px, rgba(0, 0, 0, 0.03) 1px);
+    background-size: 50px 50px, 60px 60px, 30px 30px;
+    background-position: 0 0, 25px 25px, 15px 15px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
   /* Portfolio Card Effects */
   .portfolio-card {
     @apply relative overflow-hidden rounded-2xl bg-card shadow-lg;
