@@ -2,39 +2,69 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Vikas Giri Portfolio Design System - Professional & Creative */
 
 @layer base {
   :root {
+    /* Background System */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
+    --foreground: 215 28% 17%;
+    --surface: 0 0% 98%;
+    
+    /* Card System */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
+    --card-foreground: 215 28% 17%;
+    --card-hover: 220 14% 96%;
+    
+    /* Popover System */
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --popover-foreground: 215 28% 17%;
+    
+    /* Brand Colors - Professional Blue with Creative Accent */
+    --primary: 225 73% 57%;        /* Sophisticated Blue */
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 225 73% 67%;   /* Lighter for gradients */
+    
+    --secondary: 15 86% 62%;       /* Warm Orange Accent */
+    --secondary-foreground: 0 0% 100%;
+    --secondary-glow: 15 86% 72%;
+    
+    /* Neutral System */
+    --muted: 220 14% 96%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 225 73% 57%;
+    --accent-foreground: 0 0% 100%;
+    
+    /* Status Colors */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+    
+    /* Interface */
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 225 73% 57%;
+    
+    /* Design System Extensions */
+    --radius: 12px;
+    --shadow-soft: 0 4px 24px hsla(225, 73%, 57%, 0.08);
+    --shadow-medium: 0 8px 32px hsla(225, 73%, 57%, 0.12);
+    --shadow-strong: 0 16px 64px hsla(225, 73%, 57%, 0.16);
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(var(--card)) 0%, hsl(var(--surface)) 100%);
+    
+    /* Typography Scale */
+    --font-heading: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    
+    /* Animations */
+    --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 
     --radius: 0.5rem;
 
@@ -100,6 +130,152 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    scroll-behavior: smooth;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Portfolio Card Effects */
+  .portfolio-card {
+    @apply relative overflow-hidden rounded-2xl bg-card shadow-lg;
+    transition: all var(--transition-smooth);
+  }
+  
+  .portfolio-card:hover {
+    @apply -translate-y-2;
+    box-shadow: var(--shadow-strong);
+  }
+  
+  .portfolio-card-overlay {
+    @apply absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0;
+    transition: opacity var(--transition-smooth);
+  }
+  
+  .portfolio-card:hover .portfolio-card-overlay {
+    @apply opacity-100;
+  }
+  
+  /* Animated Gradient Text */
+  .gradient-text {
+    background: var(--gradient-hero);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 200%;
+    animation: gradient-shift 3s ease-in-out infinite;
+  }
+  
+  /* Skill Icons */
+  .skill-icon {
+    @apply p-4 rounded-xl bg-surface border border-border;
+    transition: all var(--transition-smooth);
+  }
+  
+  .skill-icon:hover {
+    @apply -translate-y-1 border-primary/30;
+    box-shadow: var(--shadow-medium);
+  }
+  
+  /* Timeline */
+  .timeline-item {
+    @apply relative pl-8 pb-8;
+  }
+  
+  .timeline-item:before {
+    @apply absolute left-0 top-2 w-3 h-3 rounded-full bg-primary;
+    content: '';
+  }
+  
+  .timeline-item:after {
+    @apply absolute left-1.5 top-5 w-0.5 h-full bg-border;
+    content: '';
+  }
+  
+  .timeline-item:last-child:after {
+    @apply hidden;
+  }
+  
+  /* Animated Underline */
+  .animated-underline {
+    @apply relative;
+  }
+  
+  .animated-underline:after {
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-primary;
+    content: '';
+    transition: width var(--transition-smooth);
+  }
+  
+  .animated-underline:hover:after {
+    @apply w-full;
+  }
+}
+
+@layer utilities {
+  /* Animation Classes */
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+  
+  .animate-scale-in {
+    animation: scaleIn 0.4s ease-out forwards;
+  }
+  
+  /* Stagger delays for list animations */
+  .animate-delay-100 { animation-delay: 0.1s; }
+  .animate-delay-200 { animation-delay: 0.2s; }
+  .animate-delay-300 { animation-delay: 0.3s; }
+  .animate-delay-400 { animation-delay: 0.4s; }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
   }
 }
